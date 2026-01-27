@@ -35,41 +35,48 @@ h1 {
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.subtitle {
-    color: #666;
-    font-size: 1.1rem;
-}
-
-.game-area {
-    background: #f8f9ff;
-    border-radius: 20px;
-    padding: 30px;
-    margin-bottom: 30px;
-}
-
-.score-board {
-    display: flex;
-    justify-content: space-around;
-    margin-bottom: 30px;
-}
-
-.score-item {
-    display: flex;
-    flex-direction: column;
+/* テンキーをグリッドで均等配置 */
+.number-buttons {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 12px;
+    margin-top: 10px;
+    justify-items: center;
     align-items: center;
-    background: white;
-    padding: 15px 30px;
-    border-radius: 15px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
 }
-
-.label {
-    color: #666;
-    font-size: 0.9rem;
-    margin-bottom: 5px;
+.number-btn {
+    width: 80px;
+    height: 80px;
+    font-size: 2.2em;
+    border-radius: 18px;
+    border: none;
+    background: #f8faff;
+    color: #7b7be6;
+    font-weight: bold;
+    box-shadow: 0 1px 4px rgba(120,120,200,0.08);
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
-
-.value {
+.number-btn:active, .number-btn.selected {
+    background: #b39ddb;
+    color: #fff;
+}
+.number-btn[data-number="ok"], .number-btn#answer-btn {
+    background: #ede7f6;
+    color: #5c6bc0;
+    font-size: 1.3em;
+    font-weight: bold;
+    border: 2px solid #b39ddb;
+    height: 80px;
+    width: 172px;
+    writing-mode: horizontal-tb;
+    letter-spacing: 0.1em;
+    grid-column: span 2;
+}
     font-size: 2rem;
     font-weight: bold;
 }

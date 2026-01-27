@@ -1,13 +1,16 @@
 // ゲームの状態管理
-let currentNumber = 0;
+let numA = 0;
+let numB = 0;
 let correctCount = 0;
 let totalCount = 0;
-let selectedAnswer = null;
+let selectedAnswer = '';
 
 // DOM要素の取得
-const questionNumberEl = document.getElementById('question-number');
-const questionDotsEl = document.getElementById('question-dots');
-const answerDotsEl = document.getElementById('answer-dots');
+const numberAEl = document.getElementById('number-a');
+const numberBEl = document.getElementById('number-b');
+const answerMarkEl = document.getElementById('answer-mark');
+const dotsAEl = document.getElementById('dots-a');
+const dotsBEl = document.getElementById('dots-b');
 const numberButtons = document.querySelectorAll('.number-btn');
 const nextBtn = document.getElementById('next-btn');
 const feedbackEl = document.getElementById('feedback');
@@ -25,23 +28,27 @@ function createDots(container, count, isAnswer = false) {
     }
 }
 
-// 新しい問題を生成
+// 新しい問題を生成（A+B=？）
 function generateNewQuestion() {
-    // 0から10のランダムな数字を生成
-    currentNumber = Math.floor(Math.random() * 11);
-    questionNumberEl.textContent = currentNumber;
-    
+    // 1〜9のランダムな数字を生成
+    numA = Math.floor(Math.random() * 9) + 1;
+    numB = Math.floor(Math.random() * 9) + 1;
+    numberAEl.textContent = numA;
+    numberBEl.textContent = numB;
+    answerMarkEl.textContent = '?';
+
     // 視覚的なドットを表示
-    createDots(questionDotsEl, currentNumber, false);
-    createDots(answerDotsEl, 0, true);
-    
+    createDots(dotsAEl, numA, false);
+    createDots(dotsBEl, numB, false);
+
     // 選択をリセット
-    selectedAnswer = null;
+    selectedAnswer = '';
+    answerMarkEl.textContent = '?';
     numberButtons.forEach(btn => {
         btn.classList.remove('selected');
         btn.disabled = false;
     });
-    
+
     // ボタンの表示切り替え
     nextBtn.classList.add('hidden');
     feedbackEl.classList.add('hidden');
@@ -53,7 +60,7 @@ function checkAnswer() {
         return;
     }
     
-    const correctAnswer = 10 - currentNumber;
+    const correctAnswer = numA + numB;
     
     // 問題数をカウント
     totalCount++;
@@ -64,15 +71,15 @@ function checkAnswer() {
         // 正解の場合
         correctCount++;
         correctCountEl.textContent = correctCount;
-        
-        feedbackEl.textContent = `🎉 せいかい！ ${currentNumber} + ${correctAnswer} = 10 だね！`;
+
+        feedbackEl.textContent = `🎉 せいかい！ ${numA} + ${numB} = ${correctAnswer} だね！`;
         feedbackEl.className = 'feedback correct';
-        
+
         // 効果音（ブラウザのビープ音）
         playSuccessSound();
     } else {
         // 不正解の場合
-        feedbackEl.textContent = `😢 ざんねん... こたえは ${correctAnswer} だよ。${currentNumber} + ${correctAnswer} = 10`;
+        feedbackEl.textContent = `😢 ざんねん... こたえは ${correctAnswer} だよ。${numA} + ${numB} = ${correctAnswer}`;
         feedbackEl.className = 'feedback incorrect';
     }
     
@@ -86,6 +93,10 @@ function checkAnswer() {
     
     // ボタンの表示切り替え
     nextBtn.classList.remove('hidden');
+    // 5秒後に自動で次の問題へ
+    setTimeout(() => {
+        generateNewQuestion();
+    }, 5000);
 }
 
 // 成功音を再生（簡易版）
@@ -114,27 +125,39 @@ function playSuccessSound() {
 }
 
 // イベントリスナーの設定
-// 数字ボタンのクリックイベント
+
+// 数字ボタンのクリックイベント（2桁まで入力可、OK/こたえる以外）
 numberButtons.forEach(btn => {
     btn.addEventListener('click', () => {
         if (btn.disabled) return;
-        
-        // 選択状態をリセット
-        numberButtons.forEach(b => b.classList.remove('selected'));
-        
-        // 選択された数字を保存
-        selectedAnswer = parseInt(btn.dataset.number);
-        btn.classList.add('selected');
-        
-        // 視覚的なドットを更新
-        createDots(answerDotsEl, selectedAnswer, true);
-        
-        // 自動的に答えをチェック
-        setTimeout(() => {
-            checkAnswer();
-        }, 500);
+        const num = btn.dataset.number;
+        if (num === 'ok') return; // 「こたえる」ボタンは除外
+        if (selectedAnswer.length < 2) {
+            selectedAnswer += num;
+            answerMarkEl.textContent = selectedAnswer;
+        }
     });
 });
+
+// 「こたえる」ボタンで答えを確定
+const answerBtn = document.getElementById('answer-btn');
+if (answerBtn) {
+    answerBtn.addEventListener('click', () => {
+        if (selectedAnswer !== '') {
+            selectedAnswer = parseInt(selectedAnswer);
+            checkAnswer();
+        }
+    });
+}
+
+// バックスペース（⌫）ボタン
+const delBtn = document.querySelector('.number-btn[data-number="10"]')?.nextElementSibling;
+if (delBtn && delBtn.textContent === '⌫') {
+    delBtn.addEventListener('click', () => {
+        selectedAnswer = selectedAnswer.slice(0, -1);
+        answerMarkEl.textContent = selectedAnswer === '' ? '?' : selectedAnswer;
+    });
+}
 
 nextBtn.addEventListener('click', generateNewQuestion);
 

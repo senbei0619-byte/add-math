@@ -12,27 +12,27 @@
 
       gtag('config', 'G-JPEL6N95D1');
     </script>
-    <title>10のほすう れんしゅう - 子供向け無料算数アプリ</title>
+    <title>足し算 れんしゅう - 子供向け無料算数アプリ</title>
     
     <!-- SEO Meta Tags -->
-    <meta name="description" content="小学生向けの無料算数学習アプリ。10の補数を楽しく練習できます。ビジュアルなドット表示で直感的に理解でき、子供が一人でも使える簡単操作です。">
-    <meta name="keywords" content="算数,10の補数,小学生,学習アプリ,無料,子供,練習,足し算,教育">
+    <meta name="description" content="小学生向けの無料算数学習アプリ。足し算を楽しく練習できます。ビジュアルなドット表示で直感的に理解でき、子供が一人でも使える簡単操作です。">
+    <meta name="keywords" content="算数,,小学生,学習アプリ,無料,子供,練習,足し算,教育">
     <meta name="author" content="算数学習アプリ">
-    <link rel="canonical" href="https://hirotyan.github.io/math-complement-10/">
+    <link rel="canonical" href="https://kaotyan.com/">
     
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://yourusername.github.io/math-complement-10/">
-    <meta property="og:title" content="10のほすう れんしゅう - 子供向け無料算数アプリ">
-    <meta property="og:description" content="小学生向けの無料算数学習アプリ。10の補数を楽しく練習できます。">
-    <meta property="og:image" content="https://yourusername.github.io/math-complement-10/og-image.png">
+    <meta property="og:url" content="https://kaotyan.com/">
+    <meta property="og:title" content="足し算 れんしゅう - 子供向け無料算数アプリ">
+    <meta property="og:description" content="小学生向けの無料算数学習アプリ。足し算を楽しく練習できます。">
+    <meta property="og:image" content="https://kaotyan.com/og-image.png">
     
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="https://yourusername.github.io/math-complement-10/">
+    <meta property="twitter:url" content="https://kaotyan.com/">
     <meta property="twitter:title" content="10のほすう れんしゅう">
     <meta property="twitter:description" content="小学生向けの無料算数学習アプリ">
-    <meta property="twitter:image" content="https://yourusername.github.io/math-complement-10/og-image.png">
+    <meta property="twitter:image" content="https://kaotyan.com/og-image.png">
     
     <!-- Google AdSense -->
             <meta name="google-adsense-account" content="ca-pub-4226588815268164">
@@ -48,8 +48,8 @@
     {
       "@context": "https://schema.org",
       "@type": "WebApplication",
-      "name": "10のほすう れんしゅう",
-      "description": "小学生向けの10の補数学習アプリ",
+      "name": "足し算 れんしゅう",
+      "description": "小学生向けの足し算学習アプリ",
       "applicationCategory": "EducationalApplication",
       "operatingSystem": "Any",
       "offers": {
@@ -67,8 +67,8 @@
 <body>
     <div class="container">
         <header>
-            <h1>🎯 10のほすう れんしゅう 🎯</h1>
-            <p class="subtitle">たして10になる かずを こたえてね！</p>
+            <h1>😊 足し算　😄</h1>
+            <p class="subtitle">すきな ふたつの かずの たしざんに ちょうせんしよう！</p>
         </header>
 
         <div class="game-area">
@@ -85,22 +85,21 @@
 
             <div class="question-box">
                 <div class="question-text">
-                    <span class="number" id="question-number">5</span>
+                    <span class="number" id="number-a">3</span>
                     <span class="plus">+</span>
-                    <span class="question-mark">?</span>
+                    <span class="number" id="number-b">5</span>
                     <span class="equals">=</span>
-                    <span class="ten">10</span>
+                    <span class="question-mark" id="answer-mark">?</span>
                 </div>
-                
                 <!-- 視覚的なドット表示 -->
                 <div class="visual-dots">
                     <div class="dots-container">
-                        <div class="dots-label">もんだいのかず</div>
-                        <div class="dots" id="question-dots"></div>
+                        <div class="dots-label">Aのかず</div>
+                        <div class="dots" id="dots-a"></div>
                     </div>
                     <div class="dots-container">
-                        <div class="dots-label">こたえのかず</div>
-                        <div class="dots" id="answer-dots"></div>
+                        <div class="dots-label">Bのかず</div>
+                        <div class="dots" id="dots-b"></div>
                     </div>
                 </div>
             </div>
@@ -117,7 +116,7 @@
                     <button class="number-btn" data-number="7">7</button>
                     <button class="number-btn" data-number="8">8</button>
                     <button class="number-btn" data-number="9">9</button>
-                    <button class="number-btn" data-number="10">10</button>
+                    <button class="number-btn" data-number="ok" id="answer-btn">こたえる</button>
                 </div>
             </div>
 
@@ -126,17 +125,7 @@
             <button id="next-btn" class="next-btn hidden">つぎのもんだい →</button>
         </div>
 
-        <div class="help-section">
-            <h3>💡 ヒント</h3>
-            <p>10のほすうとは、たして10になるかずのことだよ！</p>
-            <div class="examples">
-                <div class="example">1 + 9 = 10</div>
-                <div class="example">2 + 8 = 10</div>
-                <div class="example">3 + 7 = 10</div>
-                <div class="example">4 + 6 = 10</div>
-                <div class="example">5 + 5 = 10</div>
-            </div>
-        </div>
+        
     </div>
 
     <!-- フッター広告 -->
@@ -153,7 +142,7 @@
         </div>
 
     <footer>
-        <p>&copy; 2026 10のほすう れんしゅう | <a href="privacy.html">プライバシーポリシー</a></p>
+        <p>&copy; 2026 足し算 れんしゅう | <a href="privacy.html">プライバシーポリシー</a></p>
     </footer>
 
     <script src="script.js"></script>

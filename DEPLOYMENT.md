@@ -1,4 +1,4 @@
-# 10のほすう れんしゅう - デプロイ＆収益化ガイド
+# 足し算れんしゅう - デプロイ＆収益化ガイド
 
 このガイドでは、アプリを公開して収益を得るまでの手順を説明します。
 
@@ -31,15 +31,15 @@ EOF
 git add .
 
 # 初回コミット
-git commit -m "Initial commit: 10の補数学習アプリ"
+git commit -m "Initial commit: 足し算学習アプリ"
 
 # GitHubにリポジトリを作成（ブラウザで https://github.com/new にアクセス）
-# リポジトリ名: math-complement-10
-# 説明: 子供向け10の補数学習アプリ
+# リポジトリ名: math-addition-app
+# 説明: 子供向け足し算学習アプリ
 # Public を選択
 
 # リモートリポジトリを追加（YOUR_USERNAMEを自分のユーザー名に変更）
-git remote add origin https://github.com/YOUR_USERNAME/math-complement-10.git
+git remote add origin https://github.com/YOUR_USERNAME/math-addition-app.git
 
 # mainブランチにプッシュ
 git branch -M main
@@ -54,7 +54,7 @@ git push -u origin main
 4. **Source** で **main** ブランチを選択
 5. **Save** をクリック
 
-数分後、`https://YOUR_USERNAME.github.io/math-complement-10/` でアクセス可能になります。
+数分後、`https://YOUR_USERNAME.github.io/math-addition-app/` でアクセス可能になります。
 
 ### 1-3. URLの更新
 
@@ -63,8 +63,8 @@ git push -u origin main
 **index.htmlのcanonical URLとOGPタグ:**
 ```html
 <!-- 以下のURLを置き換え -->
-<link rel="canonical" href="https://YOUR_USERNAME.github.io/math-complement-10/">
-<meta property="og:url" content="https://YOUR_USERNAME.github.io/math-complement-10/">
+<link rel="canonical" href="https://YOUR_USERNAME.github.io/math-addition-app/">
+<meta property="og:url" content="https://YOUR_USERNAME.github.io/math-addition-app/">
 ```
 
 変更後、再度コミット＆プッシュ：
@@ -84,7 +84,7 @@ git push
 2. **今すぐ開始** をクリック
 3. Googleアカウントでログイン
 4. 必要情報を入力：
-   - ウェブサイトURL: `https://YOUR_USERNAME.github.io/math-complement-10/`
+   - ウェブサイトURL: `https://YOUR_USERNAME.github.io/math-addition-app/`
    - メールアドレス
    - 国/地域: 日本
 

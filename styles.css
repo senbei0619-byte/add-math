@@ -1,0 +1,442 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', 'Hiragino Sans', 'Yu Gothic', sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.container {
+    background: white;
+    border-radius: 30px;
+    padding: 40px;
+    max-width: 600px;
+    width: 100%;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+}
+
+header {
+    text-align: left;
+    margin-bottom: 10px;
+}
+
+h1 {
+    color: #667eea;
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* テンキーをグリッドで均等配置 */
+.number-buttons {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-gap: 12px;
+    margin-top: 10px;
+    justify-items: left;
+    align-items: left;
+}
+.number-btn {
+    width: 60px;
+    height: 60px;
+    font-size: 2.2em;
+    border-radius: 18px;
+    border: none;
+    background: #f8faff;
+    color: #7b7be6;
+    font-weight: bold;
+    box-shadow: 0 1px 4px rgba(120,120,200,0.08);
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.number-btn:active, .number-btn.selected {
+    background: #b39ddb;
+    color: #fff;
+}
+.number-btn[data-number="ok"], .number-btn#answer-btn {
+    background: #ede7f6;
+    color: #5c6bc0;
+    font-size: 1em;
+    font-weight: bold;
+    border: 2px solid #b39ddb;
+    height: 60px;
+    width: 130px;
+    writing-mode: horizontal-tb;
+    letter-spacing: 0.1em;
+    grid-column: span 2;
+}
+#answer-mark {
+    font-size: 2rem;
+    font-weight: bold;
+}
+.value.correct {
+    color: #4caf50;
+}
+
+.value.total {
+    color: #2196f3;
+}
+
+.question-box {
+    background: white;
+    border-radius: 20px;
+    padding: 10px;
+    margin-bottom: 5px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.question-text {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    font-size: 3rem;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.number {
+    color: #667eea;
+    background: #f0f0ff;
+    padding: 20px 30px;
+    border-radius: 15px;
+    min-width: 80px;
+    text-align: center;
+}
+
+.plus, .equals {
+    color: #666;
+}
+
+.question-mark {
+    color: #ff6b6b;
+    background: #fff0f0;
+    padding: 20px 30px;
+    border-radius: 15px;
+    min-width: 80px;
+    text-align: center;
+}
+
+.ten {
+    color: #4caf50;
+    background: #f0fff0;
+    padding: 20px 30px;
+    border-radius: 15px;
+    min-width: 80px;
+    text-align: left;
+}
+
+/* 視覚的なドット表示 */
+.visual-dots {
+    display: flex;
+    justify-content: space-around;
+    gap: 10px;
+    margin-top: 5px;
+}
+
+.dots-container {
+    flex: 1;
+    background: #f8f9ff;
+    padding: 5px;
+    border-radius: 15px;
+    text-align: left;
+}
+
+.dots-label {
+    color: #667eea;
+    font-weight: bold;
+    font-size: 1rem;
+    margin-bottom: 15px;
+}
+
+.dots {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px;
+    min-height: 20px;
+    align-items: center;
+}
+
+.dot {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    box-shadow: 0 2px 8px rgba(102, 126, 234, 0.4);
+    animation: popIn 0.3s ease-out;
+}
+
+.dot.answer {
+    background: linear-gradient(135deg, #4caf50 0%, #a04545 100%);
+    box-shadow: 0 2px 8px rgba(76, 175, 80, 0.4);
+}
+
+/* --- Aのドットだけ色を変える設定 --- */
+#dots-a .dot {
+    /* オレンジから赤っぽいグラデーションに変更 */
+    background: linear-gradient(135deg, #f3050d 0%, #f70703 99%, #fecfef 100%);
+    box-shadow: 0 2px 8px rgba(237, 1, 9, 0.942);
+}
+
+/* --- Bのドットの色も変えたい場合はここを追加（今は元のまま） --- */
+#dots-b .dot {
+    background: linear-gradient(135deg, #02f406 0%, #764ba2 100%);
+    box-shadow: 0 2px 8px rgba(102, 126, 234, 0.4);
+}
+
+@keyframes popIn {
+    0% {
+        transform: scale(0);
+        opacity: 0;
+    }
+    50% {
+        transform: scale(1.2);
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+/* 数字ボタン */
+.answer-section {
+    margin-bottom: 20px;
+}
+
+.number-buttons {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.number-btn {
+    font-size: 2rem;
+    font-weight: bold;
+    padding: 20px;
+    border: 3px solid #ddd;
+    border-radius: 15px;
+    background: white;
+    color: #667eea;
+    cursor: pointer;
+    transition: all 0.2s;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.number-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(102, 126, 234, 0.3);
+    border-color: #667eea;
+    background: #f0f0ff;
+}
+
+.number-btn:active {
+    transform: translateY(0);
+}
+
+.number-btn.selected {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border-color: #667eea;
+    transform: scale(1.05);
+}
+
+.number-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.submit-btn, .next-btn {
+    background: linear-gradient(135deg, #cd0541 0%, #190a77 100%);
+    color: rgb(142, 29, 29);
+    font-size: 1.3rem;
+    font-weight: bold;
+    padding: 20px 40px;
+    border: none;
+    border-radius: 1500px;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.submit-btn:hover, .next-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
+}
+
+.submit-btn:active, .next-btn:active {
+    transform: translateY(0);
+}
+
+.next-btn {
+    width: 100%;
+    background: linear-gradient(135deg, #4caf50 0%, #45a049 100%);
+}
+
+.feedback {
+    text-align: center;
+    font-size: 1.5rem;
+    font-weight: bold;
+    padding: 20px;
+    border-radius: 15px;
+    margin-bottom: 20px;
+    animation: fadeIn 0.5s;
+}
+
+.feedback.correct {
+    background: #d4edda;
+    color: #155724;
+    border: 3px solid #c3e6cb;
+}
+
+.feedback.incorrect {
+    background: #f8d7da;
+    color: #721c24;
+    border: 3px solid #f5c6cb;
+}
+
+.hidden {
+    display: none !important;
+}
+
+.help-section {
+    background: #fff9e6;
+    border-radius: 20px;
+    padding: 25px;
+    border: 3px dashed #ffd700;
+}
+
+.help-section h3 {
+    color: #ff9800;
+    margin-bottom: 15px;
+    font-size: 1.3rem;
+}
+
+/* 広告コンテナ */
+.ad-container {
+    max-width: 600px;
+    margin: 20px auto;
+    text-align: center;
+}
+
+/* フッター */
+footer {
+    text-align: center;
+    padding: 20px;
+    color: white;
+    margin-top: 20px;
+}
+
+footer p {
+    margin: 0;
+}
+
+footer a {
+    color: white;
+    text-decoration: underline;
+}
+
+.help-section p {
+    color: #666;
+    margin-bottom: 15px;
+    line-height: 1.6;
+}
+
+.examples {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.example {
+    background: white;
+    padding: 10px 20px;
+    border-radius: 10px;
+    color: #667eea;
+    font-weight: bold;
+    font-size: 1.1rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* レスポンシブデザイン */
+@media (max-width: 600px) {
+    h1 {
+        font-size: 2rem;
+    }
+
+    .question-text {
+        font-size: 2rem;
+        gap: 10px;
+    }
+
+    .number, .question-mark, .ten {
+        padding: 15px 20px;
+        min-width: 60px;
+    }
+
+    .number-buttons {
+        grid-template-columns: repeat(5, 1fr);
+        gap: 1px;
+    }
+
+    .number-btn {
+        font-size: 1.5rem;
+        padding: 15px;
+    }
+
+    .dot {
+        width: 20px;
+        height: 20px;
+    }
+
+    .visual-dots {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .submit-btn, .next-btn {
+        font-size: 1.1rem;
+        padding: 15px 30px;
+    }
+}
+
+/* ドットのエリアを横並びにする設定 */
+#dots-a, #dots-b {
+    display: flex !important;   /* 強制的に横並びにする */
+    flex-wrap: wrap !important;  /* 幅がいっぱいになったら折り返す */
+    gap: 8px;                   /* ドット同士のすきま */
+    padding: 10px;
+    width: 100%;                /* 横幅いっぱい使う */
+    box-sizing: border-box;
+}
+
+/* 1つずつのドットの大きさ（念のため固定する） */
+.dot {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    flex-shrink: 0;             /* ドットが潰れないようにする */
+}

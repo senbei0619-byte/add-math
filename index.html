@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-JPEL6N95D1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-JPEL6N95D1');
+    </script>
+    <title>足し算 れんしゅう - 子供向け無料算数アプリ</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="小学生向けの無料算数学習アプリ。足し算を楽しく練習できます。ビジュアルなドット表示で直感的に理解でき、子供が一人でも使える簡単操作です。">
+    <meta name="keywords" content="算数,,小学生,学習アプリ,無料,子供,練習,足し算,教育">
+    <meta name="author" content="算数学習アプリ">
+    <link rel="canonical" href="https://kaotyan.com/">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://kaotyan.com/">
+    <meta property="og:title" content="足し算 れんしゅう - 子供向け無料算数アプリ">
+    <meta property="og:description" content="小学生向けの無料算数学習アプリ。足し算を楽しく練習できます。">
+    <meta property="og:image" content="https://kaotyan.com/og-image.png">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://kaotyan.com/">
+    <meta property="twitter:title" content="足し算 れんしゅう">
+    <meta property="twitter:description" content="小学生向けの無料算数学習アプリ">
+    <meta property="twitter:image" content="https://kaotyan.com/og-image.png">
+    
+    <!-- Google AdSense -->
+            <meta name="google-adsense-account" content="ca-pub-4226588815268164">
+            <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4226588815268164"
+                crossorigin="anonymous"></script>
+    
+    
+    
+    <link rel="stylesheet" href="styles.css">
+    
+    <!-- Structured Data for SEO -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "足し算 れんしゅう",
+      "description": "小学生向けの足し算学習アプリ",
+      "applicationCategory": "EducationalApplication",
+      "operatingSystem": "Any",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "JPY"
+      },
+      "audience": {
+        "@type": "EducationalAudience",
+        "educationalRole": "student"
+      }
+    }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>😊 足し算　😄</h1>
+            <p class="subtitle">すきな ふたつの かずの たしざんに ちょうせんしよう！</p>
+        </header>
+
+        <div class="game-area">
+            <div class="score-board">
+                <div class="score-item">
+                    <span class="label">せいかい</span>
+                    <span class="value correct" id="correct-count">0</span>
+                </div>
+                <div class="score-item">
+                    <span class="label">もんだいすう</span>
+                    <span class="value total" id="total-count">0</span>
+                </div>
+            </div>
+
+            <div class="question-box">
+                <div class="question-text">
+                    <span class="number" id="number-a">3</span>
+                    <span class="plus">+</span>
+                    <span class="number" id="number-b">5</span>
+                    <span class="equals">=</span>
+                    <span class="question-mark" id="answer-mark">?</span>
+                </div>
+                <!-- 視覚的なドット表示 -->
+                <div style="display: flex !important; gap: 10px; justify-content: center; margin: 10px 0;">
+
+    <div style="flex: 1; background: #f0f4ff; border-radius: 10px; padding: 10px; min-width: 0;">
+        <div style="font-weight: bold; color: #5a67d8; margin-bottom: 5px;">Aのかず</div>
+        <div id="dots-a" style="display: flex !important; flex-wrap: wrap !important; gap: 5px !important; justify-content: flex-start;"></div>
+    </div>
+
+    <div style="flex: 1; background: #f0f4ff; border-radius: 10px; padding: 10px; min-width: 0;">
+        <div style="font-weight: bold; color: #5a67d8; margin-bottom: 5px;">Bのかず</div>
+        <div id="dots-b" style="display: flex !important; flex-wrap: wrap !important; gap: 5px !important; justify-content: flex-start;"></div>
+    </div>
+
+</div>
+
+            <div class="answer-section">
+                <div class="number-buttons" id="number-buttons">
+                    <button class="number-btn" data-number="0">0</button>
+                    <button class="number-btn" data-number="1">1</button>
+                    <button class="number-btn" data-number="2">2</button>
+                    <button class="number-btn" data-number="3">3</button>
+                    <button class="number-btn" data-number="4">4</button>
+                    <button class="number-btn" data-number="5">5</button>
+                    <button class="number-btn" data-number="6">6</button>
+                    <button class="number-btn" data-number="7">7</button>
+                    <button class="number-btn" data-number="8">8</button>
+                    <button class="number-btn" data-number="9">9</button>
+                    <button class="number-btn delete-btn" onclick="deleteLastChar()">⌫</button>
+                    <button class="number-btn" data-number="ok" id="answer-btn">こたえる</button>
+                </div>
+                   
+            </div>
+
+            <div id="feedback" class="feedback hidden"></div>
+        </div>
+
+        
+    </div>
+
+    <!-- フッター広告 -->
+        <div class="ad-container">
+           <ins class="adsbygoogle"
+               style="display:block"
+               data-ad-client="ca-pub-4226588815268164"
+               data-ad-slot="9876543210"
+               data-ad-format="auto"
+               data-full-width-responsive="true"></ins>
+           <script>
+               (adsbygoogle = window.adsbygoogle || []).push({});
+           </script>
+        </div>
+
+    <footer>
+        <p>&copy; 2026 足し算 れんしゅう | <a href="privacy.html">プライバシーポリシー</a></p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

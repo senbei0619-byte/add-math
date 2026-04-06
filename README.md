@@ -114,3 +114,51 @@ currentNumber2 = Math.floor(Math.random() * 6);
 ---
 
 楽しく足し算を学びましょう！ 🌟
+
+---
+
+## Python コード解説：`pr = list(product(range(nw), range(nf)))`
+
+このコードは Python の `itertools.product` を使い、2つの範囲の**直積（デカルト積）**をリストとして作成します。
+
+### 各部分の意味
+
+| コード | 意味 |
+|---|---|
+| `range(nw)` | 0 から nw-1 までの整数のシーケンス（例: nw=3 → [0, 1, 2]） |
+| `range(nf)` | 0 から nf-1 までの整数のシーケンス（例: nf=2 → [0, 1]） |
+| `product(range(nw), range(nf))` | 2つのシーケンスの全ての組み合わせ（直積）を生成するイテレータ |
+| `list(...)` | イテレータをリストに変換 |
+| `pr = ...` | 結果を変数 `pr` に代入 |
+
+### 使用例
+
+```python
+from itertools import product
+
+nw = 3
+nf = 2
+pr = list(product(range(nw), range(nf)))
+print(pr)
+# 出力: [(0, 0), (0, 1), (1, 0), (1, 1), (2, 0), (2, 1)]
+```
+
+- `range(nw)` = [0, 1, 2]
+- `range(nf)` = [0, 1]
+- `product` はこの2つの全ての組み合わせを作るため、nw × nf = 3 × 2 = **6個のタプル**が得られます。
+
+### 直積とは？
+
+直積（デカルト積）とは、2つの集合のすべての要素の組み合わせを作ることです。  
+数学的には `A × B = {(a, b) | a ∈ A, b ∈ B}` と表されます。
+
+例えば格子状のグリッド（nw 列 × nf 行）の全マスの座標を列挙するときなどに活用されます。
+
+### 注意点
+
+`itertools` は Python 標準ライブラリに含まれているため、別途インストールは不要です。  
+使用する際はファイルの先頭で以下のようにインポートしてください：
+
+```python
+from itertools import product
+```
